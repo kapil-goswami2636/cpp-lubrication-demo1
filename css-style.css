@@ -1,0 +1,72 @@
+/* =========================================================
+   CPP Digital Lubrication Management System — base styles
+   Design tokens + typography + resets
+   ========================================================= */
+:root {
+  --navy-900: #0b1f38;
+  --navy-800: #0f2a4a;
+  --navy-700: #163a63;
+  --navy-600: #1f4e85;
+  --blue-500: #1f6feb;
+  --blue-400: #4ea1ff;
+  --blue-50:  #eaf2fe;
+
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #dde3ea;
+  --border-strong: #c6cfda;
+  --text: #1b2733;
+  --text-2: #3d4b5a;
+  --muted: #66768a;
+
+  --success: #18794e;   --success-bg: #e6f4ec;
+  --warning: #a35c00;   --warning-bg: #fff4e0;
+  --danger:  #c0362c;   --danger-bg:  #fdecea;
+  --info:    #1f5fbf;   --info-bg:    #e8f0fc;
+  --neutral-bg: #eef1f5;
+  --illus: #6b4fbb;     --illus-bg: #f1edfb;
+
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow-1: 0 1px 2px rgba(15, 42, 74, .06), 0 1px 3px rgba(15, 42, 74, .06);
+  --shadow-2: 0 6px 24px rgba(15, 42, 74, .14);
+  --sidebar-w: 268px;
+  --topbar-h: 58px;
+  --font: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; } /* the hidden attribute must beat component display rules */
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { margin: 0 0 .4em; line-height: 1.25; color: var(--navy-800); font-weight: 600; }
+h1 { font-size: 22px; }
+h2 { font-size: 17px; }
+h3 { font-size: 15px; }
+h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+p { margin: 0 0 .7em; }
+a { color: var(--blue-500); text-decoration: none; }
+a:hover { text-decoration: underline; }
+small, .small { font-size: 12px; }
+.muted { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.nowrap { white-space: nowrap; }
+.w-100 { width: 100%; }
+.mt-0 { margin-top: 0; } .mt-1 { margin-top: 8px; } .mt-2 { margin-top: 16px; } .mt-3 { margin-top: 24px; }
+.mb-0 { margin-bottom: 0; } .mb-1 { margin-bottom: 8px; } .mb-2 { margin-bottom: 16px; }
+.hidden { display: none !important; }
+.text-success { color: var(--success); } .text-warning { color: var(--warning); } .text-danger { color: var(--danger); }
+hr { border: 0; border-top: 1px solid var(--border); margin: 16px 0; }
+:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 2px; }
+.noscript { padding: 20px; background: var(--danger-bg); color: var(--danger); }
+code { font-family: var(--mono); font-size: 12px; background: var(--neutral-bg); padding: 1px 4px; border-radius: 4px; }

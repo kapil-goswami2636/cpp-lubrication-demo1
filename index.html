@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CPP Lubrication Cell — Lube Oil Management</title>
+  <meta name="description" content="Interactive demonstration of the proposed CPP Lubrication Cell digitalization platform. Illustrative prototype; not connected to plant systems.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f2a4a'/%3E%3Cpath d='M16 6c-4 6-7 9.5-7 13a7 7 0 0 0 14 0c0-3.5-3-7-7-13z' fill='%234ea1ff'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css-style.css">
+  <link rel="stylesheet" href="css-layout.css">
+  <link rel="stylesheet" href="css-components.css">
+  <link rel="stylesheet" href="css-responsive.css">
+</head>
+<body>
+  <noscript><div class="noscript">This demonstration requires JavaScript.</div></noscript>
+
+  <div class="app" id="app">
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <strong>CPP Lubrication</strong>
+          <span>Digital Management System</span>
+        </div>
+      </div>
+      <div class="nav-filter">
+        <input type="search" id="navFilter" placeholder="Filter menu…" aria-label="Filter menu">
+      </div>
+      <nav class="nav" id="nav"></nav>
+      <div class="sidebar-foot">
+        <span class="muted small">Lube Oil Cell · v1.0</span>
+      </div>
+    </aside>
+    <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+    <!-- ============ MAIN ============ -->
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn" id="sidebarToggle" aria-label="Toggle menu" title="Toggle menu"></button>
+        <div class="global-search">
+          <input type="search" id="globalSearch" placeholder="Search pages, equipment, grades…" aria-label="Global search" autocomplete="off">
+          <div class="search-results" id="searchResults" role="listbox" hidden></div>
+        </div>
+        <div class="topbar-right">
+          <button class="icon-btn has-dot" id="notifBtn" aria-label="Notifications" title="Notifications"><span class="dot" id="notifDot" hidden></span></button>
+          <div class="profile">
+            <button class="profile-btn" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+              <span class="avatar" id="avatar">LC</span>
+              <span class="profile-text"><strong id="profileName">Demo User</strong><small id="profileRole">Lube Cell In-charge</small></span>
+            </button>
+            <div class="profile-menu" id="profileMenu" hidden>
+              <label class="small muted" for="roleSelect">Switch demo role</label>
+              <select id="roleSelect"></select>
+              <p class="small muted">Roles are illustrative and pending client confirmation.</p>
+              <button class="btn btn-sm btn-ghost w-100" data-nav="settings">Settings</button>
+              <button class="btn btn-sm btn-danger-ghost w-100" data-action="reset-demo">Reset data</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="disclaimer" role="note">
+        Demonstration copy with sample figures — not linked to the plant inventory, EKAYAN or LIMS.
+      </div>
+
+      <main class="content" id="content" tabindex="-1">
+        <div class="page-head" id="pageHead"></div>
+        <div id="page" class="page"></div>
+      </main>
+    </div>
+
+    <!-- notification panel -->
+    <aside class="notif-panel" id="notifPanel" hidden aria-label="Notifications">
+      <div class="notif-head"><strong>Notifications</strong>
+        <div><button class="btn btn-xs btn-ghost" data-action="notif-read-all">Mark all read</button>
+        <button class="icon-btn sm" data-action="notif-close" aria-label="Close">×</button></div></div>
+      <div class="notif-list" id="notifList"></div>
+      <div class="notif-foot"><button class="btn btn-sm btn-ghost w-100" data-nav="notifications">Open Notification Center</button></div>
+    </aside>
+  </div>
+
+  <div class="modal-root" id="modalRoot"></div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <div class="loading-veil" id="loadingVeil"><div class="spinner"></div><span>Loading source data…</span></div>
+
+  <!-- Optional libraries (the app degrades gracefully if any fail to load) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js" defer></script>
+
+  <!-- Source-derived data (generated by tools/extract_source_data.py) -->
+  <script src="data-meta.js" defer></script>
+  <script src="data-inventory.js" defer></script>
+  <script src="data-consumption.js" defer></script>
+  <script src="data-topup.js" defer></script>
+  <script src="data-greasing.js" defer></script>
+  <script src="data-sampling.js" defer></script>
+  <script src="data-analysis.js" defer></script>
+  <script src="data-filtration.js" defer></script>
+  <script src="data-scrap.js" defer></script>
+  <script src="data-demo-config.js" defer></script>
+
+  <!-- Core -->
+  <script src="js-utils.js" defer></script>
+  <script src="js-storage.js" defer></script>
+  <script src="js-calculations.js" defer></script>
+  <script src="js-validation.js" defer></script>
+  <script src="js-state.js" defer></script>
+  <script src="js-notifications.js" defer></script>
+  <script src="js-ui.js" defer></script>
+  <script src="js-reports.js" defer></script>
+  <script src="js-router.js" defer></script>
+  <script src="js-navigation.js" defer></script>
+
+  <!-- Feature modules (each registers its pages with the router) -->
+  <script src="mod-common.js" defer></script>
+  <script src="mod-requests.js" defer></script>
+  <script src="mod-dashboard.js" defer></script>
+  <script src="mod-equipment.js" defer></script>
+  <script src="mod-masters.js" defer></script>
+  <script src="mod-receipt.js" defer></script>
+  <script src="mod-issue.js" defer></script>
+  <script src="mod-inventory.js" defer></script>
+  <script src="mod-consumption.js" defer></script>
+  <script src="mod-scrap.js" defer></script>
+  <script src="mod-reports.js" defer></script>
+  <script src="mod-admin.js" defer></script>
+  <script src="js-app.js" defer></script>
+</body>
+</html>

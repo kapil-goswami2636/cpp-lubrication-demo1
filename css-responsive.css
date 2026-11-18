@@ -1,0 +1,47 @@
+/* =========================================================
+   Responsive rules
+   ========================================================= */
+@media (max-width: 1280px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .arch { grid-template-columns: 1fr; }
+}
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(-100%); box-shadow: var(--shadow-2); }
+  .app.sidebar-open .sidebar { transform: none; }
+  .app.sidebar-open .sidebar-scrim { display: block; position: fixed; inset: 0; background: rgba(11,31,56,.4); z-index: 35; }
+  .main { margin-left: 0; }
+  .guide { left: 12px; right: 12px; }
+  .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-text { display: none; }
+}
+@media (max-width: 760px) {
+  .content { padding: 14px 16px 150px; }
+  .topbar { padding: 0 10px; gap: 6px; }
+  .demo-badge { display: none; }
+  #startDemoBtn { padding: 5px 8px; font-size: 12px; }
+  .grid-2, .grid-3, .grid-4, .split { grid-template-columns: 1fr; }
+  .form-grid, .form-grid.cols-3 { grid-template-columns: 1fr; }
+  .field.span-2 { grid-column: auto; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpi .kpi-value { font-size: 18px; }
+  .table-toolbar input[type=search] { min-width: 0; width: 100%; }
+  .table-toolbar .filter { flex: 1 1 45%; }
+  .table-toolbar select { width: 100%; }
+  .guide-body { flex-wrap: wrap; gap: 8px; }
+  .guide-step { min-width: 0; font-size: 20px; }
+  .guide-text { flex-basis: calc(100% - 70px); }
+  .guide-actions { width: 100%; justify-content: flex-end; }
+  .notif-panel { left: 8px; right: 8px; width: auto; }
+  .qa-row { grid-template-columns: 28px 1fr; }
+  .qa-status { grid-column: 2; justify-content: flex-start; }
+  .flow-arrow { display: none; }
+  .modal-backdrop { padding: 10px; }
+  .global-search { max-width: none; }
+  .disclaimer { font-size: 11.5px; padding: 6px 16px; }
+}
+@media print {
+  .sidebar, .topbar, .guide, .disclaimer, .table-toolbar, .pager, .btn, .icon-btn { display: none !important; }
+  .main { margin: 0; }
+  .content { padding: 0; }
+  .card { box-shadow: none; }
+}
